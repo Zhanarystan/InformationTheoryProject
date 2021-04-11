@@ -36,6 +36,24 @@ public class ProjectConsole {
         return myArr;
     }
 
+    public static void grouping(SymbolProbability sp, ArrayList<SymbolProbability> table){
+        double sum = 0;
+        double sum1 = 0;
+
+        table.remove(sp);
+
+        for(int i = 0;i < table.size(); i++){
+            sum1 += table.get(i).getProbability();
+        }
+
+        while ((Math.round(sum * 100.0)/100.0) != (Math.round(sum1 * 100.0)/100.0)){
+
+            grouping(table.get(0),table);
+        }
+    }
+
+
+
     public static void main(String[] args){
         String data="";
         System.out.println(System.getProperty("user.dir"));
@@ -61,6 +79,7 @@ public class ProjectConsole {
             table.add(sp);
         }
 
+        Collections.sort(table);
         for(SymbolProbability sp: table){
             System.out.println(sp.getSymbol()+"   "+sp.getProbability());
         }
