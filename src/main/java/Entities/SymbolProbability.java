@@ -3,7 +3,7 @@ package Entities;
 public class SymbolProbability implements Comparable<SymbolProbability> {
     private Character symbol;
     private double probability;
-    private String code;
+    private String code = "";
 
     public SymbolProbability(){}
     public SymbolProbability(Character symbol, double probability) {
