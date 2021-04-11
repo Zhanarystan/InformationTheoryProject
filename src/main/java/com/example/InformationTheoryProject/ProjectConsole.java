@@ -23,6 +23,6 @@ public class ProjectConsole {
             e.printStackTrace();
         }
 
-        System.out.println(data);
+        System.out.println(data.charAt(1));
     }
 }
