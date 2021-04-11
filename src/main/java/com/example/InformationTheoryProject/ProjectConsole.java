@@ -8,13 +8,13 @@ import java.util.Scanner;
 
 public class ProjectConsole {
     public static void main(String[] args){
-        System.out.println("Working Directory = " + System.getProperty("user.dir"));
-
+        String data="";
+        System.out.println(System.getProperty("user.dir"));
         try {
-            File myObj = new File(System.getProperty("user.dir")+"\\src\\main\\java\\files\\Text.txt");
+            File myObj = new File(System.getProperty("user.dir")+"/src/main/java/files/Text.txt");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
+                data = myReader.nextLine();
                 System.out.println(data);
             }
             myReader.close();
@@ -22,5 +22,7 @@ public class ProjectConsole {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+
+        System.out.println(data);
     }
 }
