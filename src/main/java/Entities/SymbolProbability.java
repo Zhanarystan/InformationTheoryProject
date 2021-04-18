@@ -1,12 +1,12 @@
 package Entities;
 
 public class SymbolProbability implements Comparable<SymbolProbability> {
-    private Character symbol;
+    private String symbol;
     private double probability;
     private String code = "";
 
     public SymbolProbability(){}
-    public SymbolProbability(Character symbol, double probability) {
+    public SymbolProbability(String symbol, double probability) {
         this.symbol = symbol;
         this.probability = probability;
     }
@@ -16,11 +16,11 @@ public class SymbolProbability implements Comparable<SymbolProbability> {
         this.code = code;
     }
 
-    public Character getSymbol() {
+    public String getSymbol() {
         return symbol;
     }
 
-    public void setSymbol(Character symbol) {
+    public void setSymbol(String symbol) {
         this.symbol = symbol;
     }
 
