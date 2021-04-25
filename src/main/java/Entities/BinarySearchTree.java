@@ -97,13 +97,11 @@ public class BinarySearchTree<T extends Comparable> {
 
     public void print() {
         print(root);
-        System.out.println();
     }
 
     private void print(Node node) {
         if (node != null) {
             print(node.getLeft());
-            System.out.print(node.getData().getSymbol()  + " ");
             print(node.getRight());
         }
     }
