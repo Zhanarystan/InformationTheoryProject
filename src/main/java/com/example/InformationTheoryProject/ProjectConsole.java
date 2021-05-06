@@ -420,6 +420,7 @@ public class ProjectConsole {
         System.out.println(part6Input);
         System.out.println("Output:");
         System.out.println(part6Result);
+        System.out.println();
 
     }
 }
