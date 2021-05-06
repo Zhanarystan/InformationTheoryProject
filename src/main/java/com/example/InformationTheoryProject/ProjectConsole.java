@@ -421,6 +421,7 @@ public class ProjectConsole {
         System.out.println("Output:");
         System.out.println(part6Result);
         System.out.println();
+        System.out.println();
 
     }
 }
