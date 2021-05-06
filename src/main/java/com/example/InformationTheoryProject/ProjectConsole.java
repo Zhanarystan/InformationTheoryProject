@@ -12,16 +12,25 @@ public class ProjectConsole {
 
     public static ArrayList<SymbolProbability> table = new ArrayList<>();
 
+    public static String part1Input;
     public static String part1Result;
 
+    public static String part2Input;
+    public static String part2Input1;
     public static String part2Result;
+    public static String part2Result1;
 
+    public static String part3Input;
+    public static String part3Input1;
     public static String part3Result;
 
+    public static String part4Input;
     public static String part4Result;
 
+    public static String part5Input;
     public static String part5Result;
 
+    public static String part6Input;
     public static String part6Result;
 
     public static double getProbability(Character uniqueSymbol,String wholeText){
@@ -67,21 +76,26 @@ public class ProjectConsole {
 
     public static ArrayList<SymbolProbability> part1(){
 
-
+        part1Input=getText();
         ArrayList<Character> uniqueChars = getUniqueChars(getText());
-
 
         for(int i = 0; i < uniqueChars.size(); i++){
             double probability = getProbability(uniqueChars.get(i),getText());
             SymbolProbability sp = new SymbolProbability(String.valueOf(uniqueChars.get(i)), probability);
+
             table.add(sp);
         }
 
         Collections.sort(table);
 
+        String res = "";
+        for(SymbolProbability sp: table){
 
+            res+=sp.getSymbol()+"  "+sp.getProbability()+"\n";
+        }
 
-
+        part1Input=getText();
+        part1Result=res;
         return table;
     }
 
@@ -126,22 +140,26 @@ public class ProjectConsole {
             tree.insert(newSp1);
         }
         tree.print();
-
+        String dictionary = "";
         for (int i=0;i<table1.size();i++){
             table.get(i).setCode(tree.find(table1.get(i)).getCode());
+            dictionary+=table.get(i).getSymbol() + " " + table.get(i).getCode() + "\n";
         }
 
         String text = getText();
 
         ArrayList<String> encoded = new ArrayList<>();
+
         for(int i=0;i<text.length();i++){
             for(int j=0;j<table.size();j++){
                 if(table.get(j).getSymbol().equals(String.valueOf(text.charAt(i)))){
                     encoded.add(table.get(j).getCode());
+
                     break;
                 }
             }
         }
+        part2Result1=dictionary;
         return encoded;
     }
 
@@ -152,6 +170,8 @@ public class ProjectConsole {
             encoded+=e;
         }
 
+        part2Input=part1Result;
+        part2Input1=getText();
         part2Result=encoded;
         return encoded;
     }
@@ -170,7 +190,8 @@ public class ProjectConsole {
                 }
             }
         }
-
+        part3Input=part2Result;
+        part3Input1=part2Result1;
         part3Result=decoded;
         return decoded;
     }
@@ -183,7 +204,7 @@ public class ProjectConsole {
     }
 
     public static String part4(){
-        String fromPart2 = part2();
+        String fromPart2 = part2Result;
         ArrayList<String> dividedBitsArray = new ArrayList<>();
         String encodedByHamming = "";
 
@@ -219,6 +240,7 @@ public class ProjectConsole {
             encodedByHamming+=dividedBitsArrayWithRedundancy.get(i);
         }
 
+        part4Input=part2Result;
         part4Result=encodedByHamming;
          return encodedByHamming;
     }
@@ -236,7 +258,7 @@ public class ProjectConsole {
             }
         }
 
-        System.out.println(fromPart2.substring(4,13));
+
         for(int i = 0; i < fromPart2.length(); i+=4){
             dividedBitsArray.add(fromPart2.substring(i,i+4));
         }
@@ -261,7 +283,7 @@ public class ProjectConsole {
 
     public static String part5(){
         String encodedByHamming = part4();
-        System.out.println(encodedByHamming);
+
         for(int i = 0; i < encodedByHamming.length(); i+=14){
             int pos = (int)(i + Math.random() * 14);
             if(pos>=encodedByHamming.length()){
@@ -276,6 +298,7 @@ public class ProjectConsole {
             encodedByHamming = encodedByHamming.substring(0,pos) + changed + encodedByHamming.substring(pos+1);
         }
 
+        part5Input=part4Result;
         part5Result = encodedByHamming;
         return encodedByHamming;
     }
@@ -308,13 +331,13 @@ public class ProjectConsole {
 
     public static String part6(){
         String encodedByHammingWithError = part5();
-        System.out.println(encodedByHammingWithError);
+
         ArrayList<String> encodedByHammingWithErrorArray = new ArrayList<>();
         for(int i = 0; i < encodedByHammingWithError.length(); i+=7){
             encodedByHammingWithErrorArray.add(encodedByHammingWithError.substring(i,i+7));
         }
 
-        System.out.println("Detecting Errors with error syndrome");
+
         for(int i = 0; i < encodedByHammingWithErrorArray.size(); i++){
             String i1 = String.valueOf(encodedByHammingWithErrorArray.get(i).charAt(0));
             String i2 = String.valueOf(encodedByHammingWithErrorArray.get(i).charAt(1));
@@ -329,7 +352,7 @@ public class ProjectConsole {
             String s2 = xor(xor(xor(r2,i2),i3),i4);
             String s3 = xor(xor(xor(r3,i1),i2),i4);
             String S = s1 + s2 + s3;
-            System.out.println(S);
+
 
             if(errorDetectingInWhichPosition(S) == 7){
                 continue;
@@ -345,6 +368,7 @@ public class ProjectConsole {
             str+=s;
         }
 
+        part6Input=part5Result;
         part6Result = str;
         return str;
     }
@@ -352,11 +376,51 @@ public class ProjectConsole {
     public static void main(String[] args){
         part3();
         part6();
+
+        System.out.println("Part 1");
+        System.out.println("Input:");
+        System.out.println(part1Input);
+        System.out.println("Output:");
+        System.out.println(part1Result);
+        System.out.println();
+        System.out.println();
+        System.out.println("Part 2");
+        System.out.println("Input:");
+        System.out.println(part2Input1);
+        System.out.println(part2Input);
+        System.out.println("Output:");
+        System.out.println(part2Result1);
         System.out.println(part2Result);
+        System.out.println();
+        System.out.println();
+        System.out.println("Part 3");
+        System.out.println("Input:");
+        System.out.println(part2Result1);
+        System.out.println(part3Input);
+        System.out.println("Output:");
         System.out.println(part3Result);
+        System.out.println();
+        System.out.println();
+        System.out.println("Part 4");
+        System.out.println("Input:");
+        System.out.println(part4Input);
+        System.out.println("Output:");
         System.out.println(part4Result);
+        System.out.println();
+        System.out.println();
+        System.out.println("Part 5");
+        System.out.println("Input:");
+        System.out.println(part5Input);
+        System.out.println("Output:");
         System.out.println(part5Result);
+        System.out.println();
+        System.out.println();
+        System.out.println("Part 6");
+        System.out.println("Input:");
+        System.out.println(part6Input);
+        System.out.println("Output:");
         System.out.println(part6Result);
+
     }
 }
 
